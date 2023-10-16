@@ -4,9 +4,15 @@ require '../src/Fighter.php';
 
 /** ✅ DEBUT DE LA ZONE À MODIFIER ✅ **/
 
+require '../src/Weapon.php';
+require '../src/Shield.php';
 
-$heracles = new Fighter('Heracles', 20, 6);
-$boar = new Fighter('Erymanthian Boar', 25, 12);
+$heracles = new Fighter('Heracles', 20, 6, 'heracles.svg');
+$boar = new Fighter('Erymanthian Boar', 25, 12, 'boar.svg');
+$weapon = new Weapon(10, 'sword.svg');
+$shield = new Shield(10, 'shield.svg');
+$heracles->setWeapon($weapon);
+$heracles->setShield($shield);
 
 /** FIN DE LA ZONE A MODIFIER **/
 /** ⛔ Ne pas modifier en dessous ⛔ **/

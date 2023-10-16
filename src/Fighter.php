@@ -11,7 +11,7 @@ class Fighter
     private string $image;
 
     private int $life = self::MAX_LIFE;
-    
+
     public function __construct(
         string $name,
         int $strength = 10,
@@ -44,9 +44,10 @@ class Fighter
 
 
 
+
     public function fight(Fighter $adversary): void
     {
-        $damage = rand(1, $this->getStrength()) - $adversary->getDexterity();
+        $damage = rand(1, $this->getDamage()) - $adversary->getDexterity();
         if ($damage < 0) {
             $damage = 0;
         }
@@ -69,7 +70,7 @@ class Fighter
      */
     public function setLife($life)
     {
-        if($life < 0) {
+        if ($life < 0) {
             $life = 0;
         }
         $this->life = $life;
@@ -121,5 +122,54 @@ class Fighter
         $this->dexterity = $dexterity;
 
         return $this;
+    }
+
+    /**
+     * Propriety Weapon
+     */
+
+    private ?Weapon $weapon = null;
+
+    public function getWeapon(): ?Weapon
+    {
+        return $this->weapon;
+    }
+    public function setWeapon($weapon): void
+    {
+        $this->weapon = $weapon;
+    }
+
+
+    public function getDamage(): int
+    {
+        $damage = $this->strength;
+        if ($this->weapon !== null) {
+            $damage += $this->weapon->getDamage();
+        }
+        return $damage;
+    }
+
+    /**
+     * Propriety Shield
+     */
+
+    private ?Shield $shield = null;
+
+    public function getShield(): ?Shield
+    {
+        return $this->shield;
+    }
+    public function setShield($shield): void
+    {
+        $this->shield = $shield;
+    }
+
+    public function getDefense(): int
+    {
+        $defense = $this->dexterity;
+        if ($this->shield !== null) {
+            $defense += $this->shield->getProtection();
+        }
+        return $defense;
     }
 }
